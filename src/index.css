@@ -3,3 +3,16 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.display-flex {
+	display: flex;
+}
+
+.flex-auto {
+	flex: auto;
+}
+
+.text-area {
+	height: 75vh;
+	width: 75vw;
+}
