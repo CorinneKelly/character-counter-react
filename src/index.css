@@ -31,7 +31,8 @@ body {
 .text-area {
 	height: 75vh;
 	margin: 20px;
-	
+	font-size: 1.1em;
+
 }
 
 .text-box {
@@ -41,4 +42,8 @@ body {
 
 .chars-left {
 	font-size: 3em;
+}
+
+.error-message {
+	margin: 20px;
 }

@@ -61,7 +61,7 @@ class App extends Component {
       <div className="page-wrapper">
         <div className="display-flex text-align">
           <span className="flex-auto">
-            <input type="text" placeholder="Enter character limit" className="text-box" onChange={this.handleCharTotal}/>
+            <input type="integer" placeholder="Enter character limit" className="text-box" onChange={this.handleCharTotal}/>
             <span className="error-message">
               {this.state.err}
             </span>
@@ -72,7 +72,7 @@ class App extends Component {
           </span>
         </div>
         <div className="display-flex">
-          <input type="integer" className="text-area flex-auto" onChange={this.handleCharInput} />
+          <textarea className="text-area flex-auto" onChange={this.handleCharInput} />
         </div>
       </div>
     )
