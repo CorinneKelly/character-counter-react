@@ -17,44 +17,43 @@ class App extends Component {
     this.handleCharTotal = this.handleCharTotal.bind(this)    
     this.charsLeftColorChanger = this.charsLeftColorChanger.bind(this) 
   }
-  
-  charsLeftColorChanger() {
-    if (this.state.charsLeft === 0) {
+
+  componentWillUpdate(nextProps, nextState){
+    this.charsLeftColorChanger(nextState)
+  }
+
+  charsLeftColorChanger(nextState) {
+    if (nextState.charsLeft === 0) {
       document.querySelector(".chars-left").style.color = "#FFFFFF"
-    } else if (this.state.charsLeft < 0) {
+    } else if (nextState.charsLeft < 0) {
       document.querySelector(".chars-left").style.color = "red"
-    } else if (this.state.charsLeft > 0){
+    } else if (nextState.charsLeft > 0){
       document.querySelector(".chars-left").style.color = "#449978"
     }
   }
 
   handleCharInput(event){
     event.preventDefault()
-
     this.setState({
       charCount: event.target.value.length,
       charsLeft: this.state.totalChars - event.target.value.length
     })
-    this.charsLeftColorChanger()
   }
 
 
   handleCharTotal(event) {
     event.preventDefault()
-
     if (!!parseInt(event.target.value)) {
       this.setState({
         totalChars: parseInt(event.target.value),
         charsLeft: parseInt(event.target.value) - this.state.charCount,
         err: ""
       })
-      this.charsLeftColorChanger()
     } else {
       this.setState({
         err: "Please enter a valid number"
       })
     }
-
   }
 
   render() {
