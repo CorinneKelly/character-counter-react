@@ -16,27 +16,45 @@ class App extends Component {
     this.handleCharTotal = this.handleCharTotal.bind(this)    
   }
 
+  charsLeftColorChanger() {
+    if(this.state.charsLeft > 0) {
+      document.querySelector(".chars-left").style.color = '#449978'
+    } else if (this.state.charsLeft < 0) {
+      document.querySelector(".chars-left").style.color = '#EO5C57'
+    } else if (this.state.charsLeft === 0){
+      document.querySelector(".chars-left").style.color = '#000000'
+    }
+  }
+
   handleCharInput(event){
     event.preventDefault()
+
     this.setState({
       charCount: event.target.value.length,
       charsLeft: this.state.totalChars - event.target.value.length
     })
+    this.charsLeftColorChanger()
   }
 
-  handleCharTotal(event){
+
+  handleCharTotal(event) {
     event.preventDefault()
     this.setState({
-      totalChars: event.target.value.parseInt()
+      totalChars: parseInt(event.target.value),
+      charsLeft: parseInt(event.target.value) - this.state.charCount
     })
+
+    this.charsLeftColorChanger()
   }
 
   render() {
     return (
-      <div className="">
-        <input type="textbox" className="text-box" onChange={this.handleCharTotal}/>
-        <input type="textarea" className="text-area" onChange={this.handleCharInput} />
-        {this.state.charsLeft}
+      <div>
+        Enter the max number of characters:<input type="textbox" className="text-box" onChange={this.handleCharTotal}/>
+        <div className="display-flex">
+          <input type="integer" className="text-area" onChange={this.handleCharInput} />
+        </div>
+        <span className="chars-left">Characters Left: {this.state.charsLeft}</span>
       </div>
     )
   }
