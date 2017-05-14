@@ -2,6 +2,17 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-color: #61C6CC;
+  color: #FFFFFF;
+}
+
+.page-wrapper {
+	text-align: center;
+	margin: 20px auto;
+}
+
+.text-align {
+	text-align: center;
 }
 
 .display-flex {
@@ -12,7 +23,22 @@ body {
 	flex: auto;
 }
 
+.flex-80 {
+	flex: 80;
+}
+
+
 .text-area {
 	height: 75vh;
-	width: 75vw;
+	margin: 20px;
+	
+}
+
+.text-box {
+	height: 20px;
+	border-radius: 5px;
+}
+
+.chars-left {
+	font-size: 3em;
 }

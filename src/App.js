@@ -9,20 +9,22 @@ class App extends Component {
     this.state = {
       totalChars: 0,
       charCount: 0,
-      charsLeft: 0
+      charsLeft: 0,
+      err: ""
     }
 
     this.handleCharInput = this.handleCharInput.bind(this)    
     this.handleCharTotal = this.handleCharTotal.bind(this)    
+    this.charsLeftColorChanger = this.charsLeftColorChanger.bind(this) 
   }
-
+  
   charsLeftColorChanger() {
-    if(this.state.charsLeft > 0) {
-      document.querySelector(".chars-left").style.color = '#449978'
+    if (this.state.charsLeft === 0) {
+      document.querySelector(".chars-left").style.color = "#FFFFFF"
     } else if (this.state.charsLeft < 0) {
-      document.querySelector(".chars-left").style.color = '#EO5C57'
-    } else if (this.state.charsLeft === 0){
-      document.querySelector(".chars-left").style.color = '#000000'
+      document.querySelector(".chars-left").style.color = "red"
+    } else if (this.state.charsLeft > 0){
+      document.querySelector(".chars-left").style.color = "#449978"
     }
   }
 
@@ -39,22 +41,40 @@ class App extends Component {
 
   handleCharTotal(event) {
     event.preventDefault()
-    this.setState({
-      totalChars: parseInt(event.target.value),
-      charsLeft: parseInt(event.target.value) - this.state.charCount
-    })
 
-    this.charsLeftColorChanger()
+    if (!!parseInt(event.target.value)) {
+      this.setState({
+        totalChars: parseInt(event.target.value),
+        charsLeft: parseInt(event.target.value) - this.state.charCount,
+        err: ""
+      })
+      this.charsLeftColorChanger()
+    } else {
+      this.setState({
+        err: "Please enter a valid number"
+      })
+    }
+
   }
 
   render() {
     return (
-      <div>
-        Enter the max number of characters:<input type="textbox" className="text-box" onChange={this.handleCharTotal}/>
-        <div className="display-flex">
-          <input type="integer" className="text-area" onChange={this.handleCharInput} />
+      <div className="page-wrapper">
+        <div className="display-flex text-align">
+          <span className="flex-auto">
+            <input type="text" placeholder="Enter character limit" className="text-box" onChange={this.handleCharTotal}/>
+            <span className="error-message">
+              {this.state.err}
+            </span>
+          </span>
+          
+          <span className="flex-auto chars-left">
+            {this.state.charsLeft}
+          </span>
         </div>
-        <span className="chars-left">Characters Left: {this.state.charsLeft}</span>
+        <div className="display-flex">
+          <input type="integer" className="text-area flex-auto" onChange={this.handleCharInput} />
+        </div>
       </div>
     )
   }
